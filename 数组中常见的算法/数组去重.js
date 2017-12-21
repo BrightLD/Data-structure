@@ -6,6 +6,7 @@ Array.prototype.myUnique = function myUnique() {
     itemAry[0] = ary[0];
     for (var i = 1; i < ary.length; i++) {
         if (itemAry.indexOf(ary[i]) === -1) {
+            //indexOf方法检测某一项在数组中是否存在
             itemAry[itemAry.length] = ary[i]
         }
     }

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>outerHMTL的兼容处理</title>
+</head>
+<body>
+<div id="box" style="background:red;width:100px;height: 100px;">
+    <span>你好啊</span>
+</div>
+<script>
+    var box= document.getElementById("box");
+    Node.prototype.myOuterHTML=function outerHTML () {
+        var _this=this;
+        var chating=_this.cloneNode(true)
+        var myDiv=document.createElement("div");
+        myDiv.appendChild(chating);
+        var str= myDiv.innerHTML;
+        chating=null;
+        return str;
+    };
+    console.log(box.myOuterHTML());
+</script>
+</body>
+</html>
