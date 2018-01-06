@@ -1,6 +1,6 @@
 //数组求和的几种方式，规定数组的每一项都为数字
 let ary = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-
+1
 //利用for循环
 function sum1(ary) {
     let total = 0;
@@ -26,16 +26,18 @@ function sum3(ary) {
 
 console.log(sum3(ary));
 
-//递归求数组的和，但是要注意在使用递归的时候，一定要设置判断条件，否则就会造成栈内存过大的情况
+//递归求数组的和，但是要注意在使用递归的时候，一定要设置判断条件，否则就会造成栈内存过大的情况。
 function sum4(ary) {
     var len = ary.length;
     if (len === 0) {
         return 0
     }
     else if (len === 1) {
+        console.log(ary[0]);
         return ary[0];
     }
     else {
+        console.log(ary[0]);
         return ary[0] + sum4(ary.slice(1))
     }
 }
@@ -48,5 +50,4 @@ function sum5(ary) {
         return prev + cur
     })
 }
-
 console.log(sum5(ary));

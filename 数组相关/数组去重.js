@@ -3,8 +3,7 @@
 var ary = [12, 1, 1, 2, 3, 4, 2, 3, 4, 5, 3, 4, 8, 789];
 Array.prototype.myUnique = function myUnique() {
     var itemAry = [];
-    itemAry[0] = ary[0];
-    for (var i = 1; i < ary.length; i++) {
+    for (var i = 0; i < ary.length; i++) {
         if (itemAry.indexOf(ary[i]) === -1) {
             //indexOf方法检测某一项在数组中是否存在
             itemAry[itemAry.length] = ary[i]

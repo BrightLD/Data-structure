@@ -17,11 +17,9 @@ function find2(ary) {
 }
 
 console.log(find2(ary));
-
 function find3(ary) {
     let maxNum = Math.max.apply(null, ary);
     let minNum = Math.min.apply(null, ary);
     return maxNum - minNum;
 }
-
 console.log(find3(ary));
