@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>定位法</title>
+    <style>
+        html, body {
+            margin: 0;
+            width: 100%;
+        }
+
+        #left, #right {
+            width: 200px;
+            height: 200px;
+            background-color: #ffe6b8;
+            position: absolute;
+        }
+
+        #left {
+            left: 0;
+        }
+
+        #right {
+            right: 0;
+        }
+
+        #center {
+            min-width: 100px;
+            margin: 2px 210px;
+            background-color: #eee;
+            height: 200px;
+        }
+    </style>
+</head>
+<body>
+<div id="left">我是左边</div>
+<div id="right">我是右边</div>
+<div id="center">我是中间</div>
+</body>
+</html>
