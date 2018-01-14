@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CSS3转换、过渡、动画</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+      #box{
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100px;
+            height: 100px;
+            background: orange;
+            /*我们使用@keyframes来创建动画，必须要将其绑定在某个选择器上面这样动画才会生效*/
+            animation-name: myFirst;/*规定动画的名称*/
+            animation-duration:5s;/*规定动画运动的总时间，必须有值，没有的话动画没有效果*/
+            animation-timing-function: ease-in;/*规定动画的运动曲线，默认是匀速的(linear)*/
+            animation-delay: 2s;/*规定动画开始之前的延迟时间，默认延迟时间0s*/
+            animation-iteration-count:infinite ;/*规定动画的运动次数，默认为1次*/
+            animation-direction: alternate;/*规定动画是否要轮流方向播放，默认为normal，不会逆向播放*/
+            animation-play-state: paused;/*规定动画的状态，默认为running*/
+            animation-fill-mode: both;/*规定动画时间之外的状态，默认值为none(也就是说动画时间到达之后会恢复原来的状态，实际这种效果的需要的不多)*/
+        }
+        #box{
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100px;
+            height: 100px;
+            background: orange;
+            /*兼容Safari和Chrome*/
+            -webkit-animation: myFirst 5s ease-in 2s infinite alternate running both;
+            /*兼容opera*/
+            -o-animation: myFirst 5s ease-in 2s infinite alternate running both;
+            /*兼容Firefox*/
+            -moz-animation:myFirst 5s ease-in 2s infinite alternate running both ;
+            animation: myFirst 5s ease-in 2s infinite alternate running both;
+        }
+        /*下面不在写其他浏览器的兼容处理,animation各个属性的简写方式*/
+        /*@-webkit-keyframes myFirst  {
+            0%{background: red;left:0;top:0}
+            25%{background: orange;left:200px;top:0}
+            50%{background: yellow;left:200px;top:200px}
+            75%{background: green;left:0;top:200px}
+            100%{background: skyblue;left:0;top:0}
+          !*为了得到最佳的浏览器支持，您应该始终定义 0% 和 100% 选择器。*!
+        }*/
+    </style>
+</head>
+<body>
+<div id="box">
+
+</div>
+<script>
+    var box=document.getElementById("box");
+    box.onclick=function () {
+        this.style.animationPlayState="paused";
+        setTimeout(function () {
+            box.style.animationPlayState="running"
+        },1000)
+    }
+</script>
+</body>
+</html>

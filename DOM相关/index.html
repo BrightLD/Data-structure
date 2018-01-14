@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>添加模糊背景</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .box {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background: skyblue;
+        }
+    </style>
+</head>
+<body>
+<div class="box">
+
+</div>
+<script>
+    var box = document.getElementsByClassName("box")[0];
+    var cloDiv = document.createElement("div");
+    //所有的事件名字全都是小写
+    box.addEventListener("touchstart", fn, false);
+    box.addEventListener("touchend", fn1, false);
+    function fn() {
+        //className属性直接加就好了
+        cloDiv.className = "box";
+        cloDiv.style.background = "black";
+        cloDiv.style.opacity = "0.2";
+        cloDiv.style.display="block"
+        document.documentElement.appendChild(cloDiv);
+    }
+    function fn1() {
+        cloDiv.style.display="none"
+    }
+</script>
+</body>
+</html>

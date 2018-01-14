@@ -18,11 +18,9 @@ function lazyLoad() {
         }
     }
 }
-
 //一定要注意函数本身并不等于函数执行，lazyLoad()后返回的的是一个函数，只有将这个函数执行后，才能让第一张图片正常显示。
 lazyLoad()();
-window.addEventListener('scroll', throttle(lazyLoad()), false);
-
+ window.addEventListener('scroll', throttle(lazyLoad()), false);
 /*我们通过scroll事件来触发函数执行，scroll事件会频繁的触发dom操作可能会导致浏览器挂起，有时候甚至崩溃，我们可以通过函数节流来控制。
 * 函数节流：某些代码不可以在没有间断的情况下连续执行
 * 可以使用定时器对函数进行节流。

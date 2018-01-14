@@ -21,4 +21,4 @@ function aryJoinAry(ary,ary2) {
     //itemAry和多余的新数组拼接起来并返回。
     return itemAry.concat(longAry.slice(minLength));
 }
-console.log(aryJoinAry(ary, ary2));
+console.log(aryJoinAry(ary, ary2));// ["A", 1, "B", 2, "C", 3, "D", 4, 5, 6]
