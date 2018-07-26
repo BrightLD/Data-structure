@@ -20,5 +20,3 @@ function bubbleSort(ary) {
 }
 
 console.log(bubbleSort(ary));
-
-
