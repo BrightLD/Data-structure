@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+    hmtl,body{
+        height: 100%;  
+    }
+    *{
+        margin: 0;
+        padding: 0;
+    }
+        ul{
+            list-style:none ;
+        }
+        .box{
+            width:1500;
+            height: 200px;
+            background: yellow;
+           font-size: 0px;
+        }
+        .ul1{
+            display:inline-block;
+            width: 600px;
+            height: 100%;
+            margin-right: -20px; 
+        }
+        /* 通过给父元素设置-20px的margin值来使右侧的margin值消失 */
+        li{
+            float: left;
+            width: 180px;
+            height: 100%;
+            background: whitesmoke;
+            margin-right: 20px;
+        }
+        .ul2{
+            display: inline-block;
+            width: 600px;
+            height: 100%;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="box">
+        <ul class="ul1">
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+        </ul>
+        <ul class="ul2">
+            <li class="">4</li>
+            <li>5</li>
+            <li>6</li>
+        </ul>
+    </div>
+</body>
+</html>

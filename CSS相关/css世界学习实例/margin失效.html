@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+    html,body{
+        width: 100%;
+        height: 100%;
+    }
+    .father {
+        height: 100px;
+        background: yellow;
+        }
+    .son {
+        height: 80px;
+        background: red;
+        margin-bottom: 100px;
+    }
+    .box{
+        width: 200px;
+        height: 50px;
+        background: cadetblue;
+    }
+    .child{
+        width: 90px;
+        height: 50px;
+        margin-right: 200px;
+        background: rebeccapurple
+    }
+    </style>
+<body>
+    <div class="father">
+        <div class="son"></div>
+        <!-- 定高容器的子元素的margin-bottom失效 -->
+    </div>
+    <div class="box">
+        <div class="child">
+        <!-- 宽度定死的的子元素的margin-right属性失效 -->
+        </div>
+    </div>
+        <!-- 结论：若想使用margin属性改变当前元素的位置，必须和当前元素定位方向一样的margin属性值才可以，否则margin只能影响后面的元素或者父元素。
+        例如，一个普通元素，在默认流下，其定位方向是左侧以及上方，此时只有 margin-left
+        和 margin-top 可以影响元素的定位。但是，如果通过一些属性改变了定位方向，如
+        float:right 或者绝对定位元素的 right 右侧定位，则反过来 margin-right 可以影响元
+        素的定位，margin-left 只能影响兄弟元素。
+        
+        -->
+</body>
+</html>

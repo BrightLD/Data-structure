@@ -1,0 +1,27 @@
+html,body{
+    height: 100%;
+    margin: 0 ;
+    padding: 0 ;
+}
+.box{
+    width: 20px;
+    height: 20px;
+    border: 10px;
+    border-style: solid;
+    border-color: red yellow darkblue bisque;
+    margin:20px auto;
+}
+/* 小三角将其高度和宽度设置为0，仅仅由边框的宽度来控制,控制上下左右边框的颜色，即可达到我们想要的效果 */
+.triangle{
+   
+    margin:20px auto;
+}
+/* 伪元素的content属性是必须的，没有这个属性的话，伪元素是不会生效的*/
+.link::before{
+    content: '';
+    width: 10px;
+    height:10px;
+    background: red;
+    border-radius: 50%;
+}
+/* 当我们使用伪元素来实现某种图形，都要使其脱离文档流，否则的话因为content:'',就会被覆盖，我们就看不见 */
