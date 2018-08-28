@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>base标签的使用存在的问题</title>
+    <base target="_blank" href="javascript:;">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../reset.css">
+    <style>
+    html,body{
+        width: 100%;
+        height: 100%;
+    }
+    a{
+        display: inline-block;
+        width: 50px;
+        height: 20px;
+    }
+    #div1{
+        height: 500px;
+        background: wheat
+    }
+    #div2{
+        height: 500px;
+        background: gainsboro
+    }
+    #div3{
+        height: 500px;
+        background: green
+    }
+    #div4{
+        height: 500px;
+        background: blueviolet
+    }
+    #div5{
+        height: 500px;
+        background: skyblue
+    }
+      #div6{
+        height: 500px;
+        background: orange
+    }
+    
+    </style>
+</head>
+<body>
+    <!-- 在全局使用base标签来控制页面所有超链接的打开方式，如果页面存在锚点定位，会导致锚点定位也在新的页面打开，这样就不是我们想要的效果了 -->
+<a href="http://wwww.baidu.com">1</a>
+<div id="div1">
+1
+</div>
+<a href="#div2">2</a>
+<div id="div2">
+2
+</div>
+<a href="#div3">3</a>
+<div id="div3">
+3
+</div>
+<a href="#div4">4</a>
+<div id="div4">
+4
+</div>
+<a href="#div5">5</a>
+<div id="div5">
+5
+</div>
+</body>
+</html>
