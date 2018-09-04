@@ -1,39 +1,139 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>onscroll事件失效的情况</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../reset.css">
-    <script src="../jquery-2.0.0.min.js"> </script>
+    <script src="../jquery-2.0.0.min.js">
+    </script>
     <style>
-    html{
-        height: 100%;
-        min-width: 1200px;
-        overflow-x: hidden;
-    }
-   body{
-        height: 100%;
-        background: skyblue
-    }
-    .container{
-        width:2000px;
-        height: 8000px;
-    }
+        html {
+            height: 100%;
+            min-width: 1200px;
+            overflow-x: hidden;
+        }
+
+        body {
+            height: 100%;
+            background: skyblue
+        }
+
+        .container {
+            width: 2000px;
+            height: 8000px;
+        }
+
+        #template-myCourse-time-table {
+            width: 893px;
+            height: 454px;
+            background: #fff;
+            padding-left: 45px;
+        }
+
+        .time-table {
+            font-size: 22px;
+            text-align: center;
+            padding-top: 28px;
+            margin-bottom: 30px;
+        }
+
+        table {
+            border: solid 2px #dddddd;
+            color: #333333;
+            font-size: 14px;
+        }
+
+        td {
+            border: solid 2px #dddddd;
+            padding: 17px 32px 15px;
+            letter-spacing: 0;
+            text-align: center;
+            height: 14px;
+        }
+
+        td>span {
+            display: inline-block;
+            width: 18px;
+            height: 18px;
+            margin-right: 8px;
+        }
+
+        .h {
+            font-weight: bold;
+        }
+
+        .h-time {
+            background: url('../images/time.png') no-repeat
+        }
+        .h-part {
+            background: url('../images/part.png') no-repeat
+        }
+
+        .h-place {
+            background: url('../images/place.png') no-repeat
+        }
+        .h-teacher {
+            background: url('../images/teacher.png') no-repeat
+        }
     </style>
 </head>
-<body>
-<div class="container">
 
-</div>
+<body>
+    <div class="container">
+        <div id="template-myCourse-time-table">
+            <h6 class="time-table">课表</h6>
+            <table cellpadding="0" cellspacing="0">
+                <tr>
+                    <td class="h">
+                        <span class="h-time"></span>日期</td>
+                    <td class="h">
+                        <span class="h-part"></span>上课时段</td>
+                    <td style="width: 326px;" class="h">
+                        <span class="h-place"></span>上课地点</td>
+                    <td class="h">
+                        <span class="h-teacher"></span>讲师</td>
+                </tr>
+                <tr>
+                    <td>2018.8.28</td>
+                    <td>9:00-11:00</td>
+                    <td>北京市朝阳区广渠路金泰国际大厦C座105室</td>
+                    <td>张老师</td>
+                </tr>
+                <tr>
+                    <td>2018.8.28</td>
+                    <td>9:00-11:00</td>
+                    <td>北京市朝阳区广渠路金泰国际大厦C座105室</td>
+                    <td>张老师</td>
+                </tr>
+                <tr>
+                    <td>2018.8.28</td>
+                    <td>9:00-11:00</td>
+                    <td>北京市朝阳区广渠路金泰国际大厦C座105室</td>
+                    <td>张老师</td>
+                </tr>
+                <tr>
+                    <td>2018.8.28</td>
+                    <td>9:00-11:00</td>
+                    <td>北京市朝阳区广渠路金泰国际大厦C座105室</td>
+                    <td>张老师</td>
+                </tr>
+
+            </table>
+        </div>
+
+    </div>
 </body>
 <script>
     // 获取可视窗口的高度
-    var w=document.documentElement.clientWidth||document.clientWidth;
-    window.onscroll=function(){
+    var w = document.documentElement.clientWidth || document.clientWidth;
+    window.onscroll = function () {
         console.log("我正在滚动");
-         $(window).scrollTop()>200?$(".container").css("background","yellow"):$(".container").css("background","red");
+        $(window).scrollTop() > 200 ? $(".container").css("background", "yellow") : $(".container").css(
+            "background", "red");
     }
 </script>
+
 </html>

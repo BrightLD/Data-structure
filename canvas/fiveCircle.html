@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,6 +8,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
 </head>
+
 <body>
+
+    <canvas id="cvs" width="500px" height="300px" style="border:1px solid #000000;">
+        <!-- HTML5 <canvas> 元素用于图形的绘制，通过脚本 (通常是JavaScript)来完成.<canvas> 标签只是图形容器，您必须使用脚本来绘制图形。
+        canvas容器的默认宽度为300px；高度为150px；定义容器的宽度和高度不能通过style来定义，通过style来定义的时候会导致画出的图形变形。
+ -->
 </body>
+<script>
+    var cvs = document.getElementById("cvs");
+    var area=cvs.getContext("2d");
+    area.fillstyle="red";
+    area.fillRect(0,0,100,100);//fillRect()绘制一个矩形
+</script>
+
 </html>
