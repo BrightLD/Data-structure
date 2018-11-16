@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>手写一个简单的模板引擎</title>
+  <style>
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      line-height: 2;
+    }
+
+    h1,
+    p {
+      margin: 10px 0;
+    }
+
+    .list {
+      padding-left: 30px;
+      border-bottom: 1px dashed #ddd;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="demo"></div>
+  <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+  <script type="text/template" id="template-list">
+    <div class="list">
+      <h1>{{ title }}</h1>
+      <p style="font-size: 18px;">{{ name }}</p>
+      <p>{{ summary }}</p>
+    </div>
+  </script>
+  <script>
+  $(function() {
+    var data = [{
+      title: '从未见过如此厚颜无耻之人',
+      name: '王娟',
+      summary: '分享会一拖再拖，估计能到猴年马月'
+    }, {
+      title: '娇小可爱无敌萌妹子',
+      name: '李乐',
+      summary: '翩若惊鸿,婉若游龙；仿佛兮若轻云之蔽月 飘飘兮若流风之回雪'
+    }, {
+      title: '这才是真正不要脸的典范',
+      name: '赵知博',
+      summary: '除了宠媳妇儿以外，没别的爱好'
+    }];
+    //从backbone中借鉴来的思想
+    var template = document.getElementById('template-list').innerHTML;
+    var demo = document.getElementById('demo');
+
+    // 简单版本
+    // function templateToString(template, data) {
+    //   var result = '';
+    //   for (var i = 0; i < data.length; i++) {
+    //     result += template.replace(/{{ title }}/ig, data[i].title).replace(/{{ name }}/ig, data[i].name).replace(/{{ summary }}/ig, data[i].summary);
+    //   }
+    //   return result;
+    // }
+    //
+    // demo.innerHTML = templateToString(template, data);
+
+
+    // 通用版本
+    function templateToString(template, data) {
+      var fragment = '';
+
+      function replace_data(obj) {
+        var result = '', key = '', regex = null;
+        for (key in obj) {
+          regex = new RegExp('{{ \\s*' + key + ' \\s* }}', 'ig');
+          result = (result || template).replace(regex, obj[key]);
+        }
+        return result;
+      }
+
+      for (var i = 0; i < data.length; i++) {
+        fragment += replace_data(data[i]);
+      }
+
+      return fragment;
+    }
+
+    demo.innerHTML = templateToString(template, data);
+  });
+  </script>
+</body>
+
+</html>

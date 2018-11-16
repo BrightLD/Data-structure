@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>lable标签中嵌套了input标签的bug</title>
+    <script src="../jquery-2.0.0.min.js"></script>
+</head>
+
+<body>
+    <div class="lable-box">
+        <label for="sure">
+            <input type="checkbox" value="" id="sure">确认已经解决
+        </label>
+    </div>
+    <div class="lable-box2">
+        <label for="sure2"></label>
+        <input type="checkbox" value="" id="sure2">确认已经解决
+    </div>
+
+</body>
+<script>
+    // input为lable标签的子元素
+    // var lableBox = document.getElementsByClassName("lable-box")[0];
+    $('.lable-box').on("click",function (e) {
+        // console.log(e.currentTarget);
+        // console.log(e.target);
+        if($(e.target).is("input")) return;//这是一个完美的解决方法，不仅解决了勾选，还组织了事件触发两次的问题。
+        console.log("input为lable标签的子元素");
+    })
+ 
+    // input和lable同级
+    var lableBox2 = document.getElementsByClassName("lable-box2")[0];
+    lableBox2.onclick = function () {
+        console.log("input和lable同级");
+    };
+    // 结论：lable标签最好不要在里面嵌套input标签(容易导致事件冒泡)，使用lable标签的时候最好使用for属性来关联对应的input。
+</script>
+
+</html>
