@@ -1,0 +1,83 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no">
+    <meta name="x5-orientation" content="portrait">
+    <title>test</title>
+    <style media="screen">
+        li {
+            padding: 20px;
+        }
+
+    </style>
+</head>
+<body>
+<ul></ul>
+</body>
+<script type="text/javascript">
+    if (!HTMLElement.prototype.addTapEvent) {
+        HTMLElement.prototype.addTapEvent = function(callback) {
+            var tapStartTime = 0,
+                tapEndTime = 0,
+                tapTime = 500, //tap等待时间，在此事件下松开可触发方法
+                tapStartClientX = 0,
+                tapStartClientY = 0,
+                tapEndClientX = 0,
+                tapEndClientY = 0,
+                tapScollHeight = 15, //水平或垂直方向移动超过15px测判定为取消（根据chrome浏览器默认的判断取消点击的移动量)
+                cancleClick = false;
+            this.addEventListener('touchstart', function() {
+                tapStartTime = event.timeStamp;
+                var touch = event.changedTouches[0];
+                tapStartClientX = touch.clientX;
+                tapStartClientY = touch.clientY;
+                cancleClick = false;
+            })
+            this.addEventListener('touchmove', function() {
+                var touch = event.changedTouches[0];
+                tapEndClientX = touch.clientX;
+                tapEndClientY = touch.clientY;
+                if ((Math.abs(tapEndClientX - tapStartClientX) > tapScollHeight) || (Math.abs(tapEndClientY - tapStartClientY) > tapScollHeight)) {
+                    cancleClick = true;
+                }
+            })
+            this.addEventListener('touchend', function() {
+                tapEndTime = event.timeStamp;
+                if (!cancleClick && (tapEndTime - tapStartTime) <= tapTime) {
+                    callback();
+                }
+            })
+        }
+    }
+
+    var ul = document.querySelector('ul');
+    for (var i = 1; i <= 20; i++) {
+        var li = document.createElement('li');
+        li.innerHTML = i;
+        li.addTapEvent(function() {
+            var x = i;
+            return function() {
+                alert(x);
+            }
+        }())
+        ul.appendChild(li);
+    }
+    for (var j = 21; j <= 50; j++) {
+        var li = document.createElement('li');
+        li.innerHTML = j;
+        li.onclick = function() {
+            var x = j;
+            return function() {
+                alert(x);
+            }
+        }()
+        ul.appendChild(li);
+    }
+</script>
+</html>

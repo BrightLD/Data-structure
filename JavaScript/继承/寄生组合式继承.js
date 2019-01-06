@@ -16,6 +16,11 @@ function inherit(Child,parent) {
     /*var prototype=Object(parent.prototype);//创建对象
     prototype.constructor=child;
     child.prototype=prototype*/
-    child.prototype={...parent.prototype,constructor:child};
+    Child.prototype={...parent.prototype,constructor:Child};
 }
 inherit(Child,Parent);
+Child.prototype.fn=function () {
+    console.log(1);
+}
+var p1=new Child();
+console.log(p1);
