@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+ 
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+ 
+<body>
+    <select id="select1" multiple="multiple" size="10">
+        <option>左1</option>
+        <option>左2</option>
+        <option>左3</option>
+        <option>左4</option>
+        <option>左5</option>
+    </select>
+    <span>
+   	<button onclick="toRight()">>></button>
+   	<button onclick="toLeft()"><<</button>
+   </span>
+    <select id="select2" multiple="multiple" size="10">
+        <option>右1</option>
+        <option>右2</option>
+        <option>右3</option>
+        <option>右4</option>
+        <option>右5</option>
+    </select>
+    <script type="text/javascript">
+    var select1 = document.getElementById("select1");
+    var select2 = document.getElementById("select2");
+ 
+    function toRight() {
+        var childs = select1.childNodes;
+        for (var i = 0; i < childs.length; i++) {
+            if (childs[i].selected) {
+                select2.appendChild(childs[i]);
+            }
+        }
+    }
+ 
+    function toLeft() {
+        var childs = select2.childNodes;
+        for (var i = 0; i < childs.length; i++) {
+            if (childs[i].selected) {
+                select1.appendChild(childs[i]);
+            }
+        }
+    }
+    </script>
+</body>
+ 
+</html>

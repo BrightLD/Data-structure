@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../reset.css">
+    <style>
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <h2>{{person.name}}--{{person.age}}</h2>
+        <ul>
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+        </ul>
+        <div>{{msg}}</div>
+        <input type="text" v-model="msg">
+        <div v-text="msg"></div>
+        <div v-text="person.fav"></div>
+        <button v-on:click = "handleClick">点击on</button>
+        <button @click="handleClick">点击@</button>
+        <div v-html="htmlStr"></div>
+        <img v-bind:src="url"/>
+        <a v-bind:href="url2">去百度啊</a>
+    </div>
+    <script src="./MVue.js"></script>
+    <script>
+        let vm = new MVue({
+            el: "#app",
+            data: {
+                person: {
+                    name: 'wgh',
+                    age: "28",
+                    fav:"money"
+                },
+                url:"./mvvm.png",
+                url2:"http://www.baidu.com",
+                msg: "学习MVVM实现原理",
+                htmlStr:'<h1>秒啊</h1>',
+            },
+            methods: {
+                handleClick(){
+                    console.log(this);
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
