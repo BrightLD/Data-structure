@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="text" id="throttle">
+    <button id="btn">增加</button>
+</body>
+<script>
+    //  节流：
+    // 一般我们会给洒水机设定一个时间假设30min，当距离上次洒水时间未够30min的时候一直保持静止状态，而当到了30min则会触发洒水的事件
+
+    function inputTest(params) {
+        console.log('输入触发了');
+    }
+
+    function throttle(fun, delay) {
+        let t1 = 0; //初始时间
+        return function () {
+            let t2 = new Date();
+            if (t2 - t1 > delay) {
+                fun.apply(this, arguments);
+                t1 = t2;
+            }
+        }
+    }
+    // 总而言之节流就是在一段时间内不断操作而在你规定的时间内只能执行一次的提高性能的方法。
+    let input = document.querySelector("#throttle");
+    input.addEventListener("keyup", throttle(inputTest, 1000))
+
+    //    防抖
+
+    function addTest(params) {
+        console.log('点击触发了');
+    }
+
+    function debounce(fun, delay) {
+        let timer;
+        return function () {
+            clearTimeout(timer)
+            let args = arguments;
+            timer = setTimeout(() => {
+                fun.apply(this, args)
+            }, delay)
+        }
+    }
+    let btn = document.querySelector("#btn");
+    btn.addEventListener("click", debounce(addTest, 2000))
+    //   总而言之防抖就是在不断的操作(输入，点击)最终只执行一次
+</script>
+
+</html>
