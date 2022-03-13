@@ -1,15 +1,18 @@
+// 观察者
 class Watcher {
     constructor(vm, expr, cb) {
         this.vm = vm;
         this.expr = expr;
         this.cb = cb
         // 旧数据存起来
+        // 每个数据都对应了一个观察者，
         this.oldValue = this.getOldValue()
     }
 
     getOldValue() {
         Dep.target = this;
         let oldValue = compileUtil.getVal(this.expr, this.vm);
+        // 这一步很重要
         Dep.target = null;
         return oldValue;
     }
@@ -42,14 +45,14 @@ class Dep {
 }
 
 
-
+// 数据劫持
 class Observer {
     constructor(data) {
         this.observer(data)
     }
     observer(data) {
-        if (data && typeof data === 'object') {
-            console.log(Object.keys(data));
+        if (data && data instanceof Object) {
+            // console.log(Object.keys(data));
             Object.keys(data).forEach((key) => {
                 this.defineReactive(data, key, data[key])
             });
@@ -62,12 +65,14 @@ class Observer {
         //         age:""
         //     }
         // }
-        // 这里需要递归遍历
+        // 这里需要递归遍历，observe 方法里面有对对象的判断
         this.observer(value)
         let dep = new Dep();
         // 劫持并监听所有属性
         Object.defineProperty(obj, key, {
+            // enumberable 可枚举的，该属性才会出现在对象的可枚举属性中
             enumerable: true,
+            // configurable 可配置的
             configurable: false,
             get() {
                 // 初始化

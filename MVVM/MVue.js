@@ -34,15 +34,13 @@ let compileUtil = {
     },
     html(node, expr, vm) {
         let value = this.getVal(expr, vm);
-        // 绑定挂插着，当数据变化的时候，触发这里的回调函数，触发更新
+        // 订阅数据变化，绑定观察者
+        // 绑定观察者，当数据变化的时候，触发这里的回调函数，触发更新
         // 绑定更新函数 数据=>视图
         new Watcher(vm, expr, (newVal) => {
             this.updater.htmlUpdater(node, newVal)
         })
-        node.addEventListener("input", function (e) {
-            // 设置值
-            e.setVal(expr, vm, e.target.value)
-        })
+       
         // 视图=>数据=>更新视图
         this.updater.htmlUpdater(node, value)
     },
@@ -50,6 +48,10 @@ let compileUtil = {
         let value = this.getVal(expr, vm);
         new Watcher(vm, expr, (newVal) => {
             this.updater.modelUpdater(node, newVal)
+        })
+        node.addEventListener("input", function (e) {
+            // 设置值
+            compileUtil.setVal(expr, vm, e.target.value)
         })
         this.updater.modelUpdater(node, value)
     },
@@ -66,13 +68,16 @@ let compileUtil = {
         bindUpdater(node, attrName, value) {
             node.setAttribute(attrName, value)
         },
+        // v-model  指令
         modelUpdater(node, value) {
             node.value = value;
         },
+        // v-html 指令
         htmlUpdater(node, value) {
             // innerHTML 这里需要注意innerHTML为大写
             node.innerHTML = value;
         },
+        // {{}}
         textUpdater(node, value) {
             // textContent 设置节点的值为value
             node.textContent = value;
@@ -172,7 +177,7 @@ class Compile {
     }
 }
 
-
+// 定义一个Vue类
 class MVue {
     constructor(options) {
         // 指定元素容器

@@ -41,18 +41,17 @@
     <script>
         let vm = new MVue({
             el: "#app",
-            data() {
-                return {
-                    person: {
-                        name: 'wgh',
-                        age: "28",
-                        fav: "money"
-                    },
-                    url: "./mvvm.png",
-                    url2: "http://www.baidu.com",
-                    msg: "学习MVVM实现原理",
-                    htmlStr: '<h1>秒啊</h1>',
-                }
+            data: {
+                person: {
+                    name: 'wgh',
+                    age: "28",
+                    fav: "money"
+                },
+                url: "./mvvm.png",
+                url2: "http://www.baidu.com",
+                msg: "学习MVVM实现原理",
+                htmlStr: '<h1>秒啊</h1>',
+
             },
             methods: {
                 handleClick() {
