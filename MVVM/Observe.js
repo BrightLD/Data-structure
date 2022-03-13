@@ -83,6 +83,7 @@ class Observer {
             set: (newVal) => {
                 // 这里需要改变this的指向，这里的指向使obj
                 console.log(this, '-------');
+                // 这里再次调用observer 是为了给新增加的值也绑定get 和 set
                 this.observer(newVal)
                 if (newVal !== value) {
                     value = newVal;

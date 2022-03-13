@@ -2,6 +2,7 @@ let compileUtil = {
     getVal(expr, vm) {
         // [person,name]
         return expr.split(".").reduce((data, currentVal) => {
+            console.log(data,currentVal,'------');
             return data[currentVal]
         }, vm.$data)
     },
@@ -11,6 +12,7 @@ let compileUtil = {
         }, vm.$data)
     },
     getContent(expr, vm) {
+        console.log(expr,vm);
         return expr.replace(/\{\{(.+?)\}\}/g, (...args) => {
             console.log(args);
             return this.getVal(args[1], vm);
@@ -23,6 +25,8 @@ let compileUtil = {
             value = expr.replace(/\{\{(.+?)\}\}/g, (...args) => {
                 console.log(args);
                 new Watcher(vm, args[1], (newVal) => {
+                     console.log(newVal,"------------------------");
+                    //  text 这里的新值要重新获取
                     this.updater.textUpdater(node, this.getContent(expr, vm))
                 })
                 return this.getVal(args[1], vm);
