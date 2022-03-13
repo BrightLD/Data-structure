@@ -30,30 +30,35 @@
         <input type="text" v-model="msg">
         <div v-text="msg"></div>
         <div v-text="person.fav"></div>
-        <button v-on:click = "handleClick">点击on</button>
+        <button v-on:click="handleClick">点击on</button>
         <button @click="handleClick">点击@</button>
         <div v-html="htmlStr"></div>
-        <img v-bind:src="url"/>
+        <img v-bind:src="url" />
         <a v-bind:href="url2">去百度啊</a>
     </div>
+    <script src="./Observe.js"></script>
     <script src="./MVue.js"></script>
     <script>
         let vm = new MVue({
             el: "#app",
-            data: {
-                person: {
-                    name: 'wgh',
-                    age: "28",
-                    fav:"money"
-                },
-                url:"./mvvm.png",
-                url2:"http://www.baidu.com",
-                msg: "学习MVVM实现原理",
-                htmlStr:'<h1>秒啊</h1>',
+            data() {
+                return {
+                    person: {
+                        name: 'wgh',
+                        age: "28",
+                        fav: "money"
+                    },
+                    url: "./mvvm.png",
+                    url2: "http://www.baidu.com",
+                    msg: "学习MVVM实现原理",
+                    htmlStr: '<h1>秒啊</h1>',
+                }
             },
             methods: {
-                handleClick(){
+                handleClick() {
                     console.log(this);
+                    this.person.name = "lll"
+                    // this.$data.person.name = "lys"
                 }
             }
         })

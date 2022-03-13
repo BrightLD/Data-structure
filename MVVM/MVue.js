@@ -5,12 +5,26 @@ let compileUtil = {
             return data[currentVal]
         }, vm.$data)
     },
+    setVal(expr, vm, inputVal) {
+        return expr.split(".").reduce((data, currentVal) => {
+            data[currentVal] = inputVal
+        }, vm.$data)
+    },
+    getContent(expr, vm) {
+        return expr.replace(/\{\{(.+?)\}\}/g, (...args) => {
+            console.log(args);
+            return this.getVal(args[1], vm);
+        })
+    },
     text(node, expr, vm) { //expr:msg
         let value;
         if (expr.indexOf("{{") !== -1) {
             console.log(expr);
             value = expr.replace(/\{\{(.+?)\}\}/g, (...args) => {
                 console.log(args);
+                new Watcher(vm, args[1], (newVal) => {
+                    this.updater.textUpdater(node, this.getContent(expr, vm))
+                })
                 return this.getVal(args[1], vm);
             })
         } else {
@@ -20,10 +34,23 @@ let compileUtil = {
     },
     html(node, expr, vm) {
         let value = this.getVal(expr, vm);
+        // 绑定挂插着，当数据变化的时候，触发这里的回调函数，触发更新
+        // 绑定更新函数 数据=>视图
+        new Watcher(vm, expr, (newVal) => {
+            this.updater.htmlUpdater(node, newVal)
+        })
+        node.addEventListener("input", function (e) {
+            // 设置值
+            e.setVal(expr, vm, e.target.value)
+        })
+        // 视图=>数据=>更新视图
         this.updater.htmlUpdater(node, value)
     },
     model(node, expr, vm) {
         let value = this.getVal(expr, vm);
+        new Watcher(vm, expr, (newVal) => {
+            this.updater.modelUpdater(node, newVal)
+        })
         this.updater.modelUpdater(node, value)
     },
     on(node, expr, vm, eventName) {
@@ -156,8 +183,26 @@ class MVue {
         this.$options = options;
         if (this.$el) {
             // 1. 实现一个数据观察者
+            new Observer(this.$data)
             // 2. 实现一个指令解析器
             new Compile(this.$el, this);
+            // 3. 代理this.$data
+            this.proxyData(this.$data)
+        }
+    }
+    proxyData(data) {
+        for (const key in data) {
+            // 这里把this.$data 代理成this
+            Object.defineProperty(this, key, {
+                get() {
+                    return data[key]
+                },
+                set(newVal) {
+                    data[key] = newVal;
+                }
+            })
+
+
         }
     }
 }
